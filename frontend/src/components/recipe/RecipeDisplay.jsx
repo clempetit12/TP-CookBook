@@ -5,7 +5,7 @@ const RecipeDisplay = () => {
     
     <>
     
-    <h1>RecipeDisplay</h1>
+    <h1>Homepage</h1>
     
     </>
     
