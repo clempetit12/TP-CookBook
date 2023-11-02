@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { postSetUserSignin, setAuthMode } from "./authSlice"
@@ -14,18 +14,22 @@ const navigate = useNavigate()
     const submitHandler = (e) => {
         e.preventDefault()
         console.log("envoyer infos connexion");
-        const credentials = {
-            login : emailRef.current.value,
-            password : passwordRef.current.value
+        
+          const  login = emailRef.current.value
+         const   password = passwordRef.current.value
 
-        }
+        
+        console.log(login,password);
      dispatch(setAuthMode("connecté"))
+     dispatch(postSetUserSignin(login,password))
      navigate("/")
 
         
 
 
     }
+
+   
     return(
     
     <>
