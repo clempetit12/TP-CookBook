@@ -1,8 +1,14 @@
 import { useRef } from "react";
 import style from "./recipe-style/Form.module.css";
+import Ingredient from "../../models/Ingredient.js"
+import Recipe from "../../models/Recipe.js"
+import {useDispatch} from "react-redux"
+import { postRecipes } from "./recipeSlice";
 
 
 const AddRecipeForm = () => {
+
+  const dispatch = useDispatch()
   const titreName = useRef();
   const timeCookingRef = useRef();
   const prepTimeRef = useRef();
@@ -15,14 +21,38 @@ const AddRecipeForm = () => {
   const handleAddFormSubmission = (e) => {
     e.preventDefault()
 
-    // add one recipe
     const name = titreName.current.value
     const description = descriptionRef.current.value
     const timeCooking = timeCookingRef.current.value
     const prepTime = prepTimeRef.current.value
     const servings = servingsRef.current.value
+    const ingredientName = ingredientNameRef.current.value
+    const quantity = ingredientQuantityRef.current.value
+    const unit = ingredientUnitRef.current.value
 
-    // ingredients ?
+
+    // ajout d'ingrédients dans le tableau ingrédient
+    const ingredients = []
+    const newIngredient = new Ingredient(ingredientName,quantity,unit)
+    ingredients.push(newIngredient)
+
+    // ajout du tableau ingrédient à recette
+    const newRecipe = new Recipe(name,description,timeCooking,prepTime,servings,ingredients)
+
+    // envoi à redux
+    dispatch(postRecipes(newRecipe))
+
+    
+
+    titreName.current.value =""
+    descriptionRef.current.value=""
+    timeCookingRef.current.value=""
+    prepTimeRef.current.value=""
+    servingsRef.current.value=""
+    ingredientNameRef.current.value=""
+    ingredientQuantityRef.current.value=""
+    ingredientUnitRef.current.value=""
+
 
   }
  
@@ -55,15 +85,15 @@ const AddRecipeForm = () => {
         <div>
           <div className={style.bottom}>
             <div>
-              <label htmlFor="">Ingredients</label>
+              <label htmlFor="Ingredientname">Ingredient</label>
             </div>
 
             <div>
-              <input type="text" name="name" ref={ingredientNameRef} />
+              <input type="text" name="Ingredientname" ref={ingredientNameRef} />
             </div>
 
             <div>
-              <label htmlFor="">Quantity</label>
+              <label htmlFor="quantity">Quantity</label>
             </div>
 
             <div>

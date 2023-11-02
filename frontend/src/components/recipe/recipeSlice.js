@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchRecipes = createAsyncThunk(
-  //GET
+
+  //GET all
   "recipes/fetchRecipes",
   async () => {
     const response = await fetch(`http://127.0.0.1:3001/recipesRoad`);
@@ -9,7 +10,7 @@ export const fetchRecipes = createAsyncThunk(
     console.log(data);
     const recipes = [];
     for (const key in data) {
-      projects.push({ id: key, ...data[key] });
+      recipes.push({ id: key, ...data[key] });
     }
     return recipes;
   }
