@@ -1,6 +1,8 @@
+import { readFileSync, writeFileSync } from "fs";
+import { resolve } from "path";
 
 export default class IngredientsDao {
-    constructor(file){
+    constructor(){
     this.ingredients = []
     this.file =  resolve("./data/ingredients.json")
 }
@@ -36,11 +38,8 @@ updateIngredient (ingredientUpdate) {
         return false 
     } else {
         ingredient.name = ingredientUpdate.name
-        ingredient.description = ingredientUpdate.description
-        ingredient.timeCooking = ingredientUpdate.timeCooking
-        ingredient.prepTime = ingredientUpdate.prepTime
-        ingredient.servings = ingredientUpdate.servings
-        ingredient.ingredients = ingredientUpdate.ingredients
+        ingredient.quantity = ingredientUpdate.quantity
+        ingredient.unit = ingredientUpdate.unit
         this.writeFileIngredients()
         return true
     }
@@ -49,7 +48,7 @@ updateIngredient (ingredientUpdate) {
 
 
 deleteIngredient (id) {
-    this.ingredients.filter(i=> i.id !== id)
+   this.ingredients= this.ingredients.filter(i=> i.id !== id)
     this.writeFileIngredients()
 }
 

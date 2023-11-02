@@ -1,7 +1,7 @@
 import express from 'express'
 import {ingredientsDao} from "../app.js"
 import { Ingredients } from '../Models/Ingredients.js'
-import IngredientsDao from '../Dao/IngredientsDao.js'
+import { authentification } from '../middleware/authentification.js'
 
 
 
@@ -13,9 +13,9 @@ ingredientsRoad.get ("/",(req,res) => {
 })
 
 // Créer un nouvel ingrédient
-ingredientsRoad.post("/", (req,res) => {
-    const {name,quantity} = req.body
-    let newIngredient = new Ingredients(null, name, quantity)
+ingredientsRoad.post("/",authentification, (req,res) => {
+    const {name,quantity,unit} = req.body
+    let newIngredient = new Ingredients(null, name, quantity, unit)
     console.log(newIngredient);
     res.json(ingredientsDao.saveIngredient(newIngredient))
 
@@ -36,15 +36,17 @@ ingredientsRoad.get("/:id", (req,res) => {
 })
 
 // Met à jour un ingrédient existant 
-ingredientsRoad.put("/:id", (req,res) => {
-    const {name,quantity} = req.body
+ingredientsRoad.put("/:id",authentification, (req,res) => {
+    const {id,name,quantity,unit} = req.body
     if(+req.params.id != id) res.sendStatus(409);
-    let ingredient = new Ingredients(null,name, quantity);
+    let ingredient = new Ingredients(id,name, quantity,unit);
     ingredientsDao.updateIngredient(ingredient  ) ? res.sendStatus(200) : res.status(400).json({code: 400, message: "problème lors de la mise à jour de l'ingrédient"})
 })
 
 //Supprime un ingrédient 
-ingredientsRoad.delete("/:id", (req,res) => {
+ingredientsRoad.delete("/:id",authentification, (req,res) => {
    ingredientsDao.deleteIngredient(+req.params.id)
    res.sendStatus(200)
 })
+
+export default ingredientsRoad;

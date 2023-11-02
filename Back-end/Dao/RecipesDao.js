@@ -1,6 +1,8 @@
+import { readFileSync, writeFileSync } from "fs";
+import { resolve } from "path";
 
 export default class Recipesdao {
-    constructor(file){
+    constructor(){
     this.recipes = []
     this.file =  resolve("./data/recipes.json")
 }
@@ -49,7 +51,7 @@ updateRecipe (recipeUpdate) {
 
 
 deleteRecipe (id) {
-    this.recipes.filter(r=> r.id !== id)
+    this.recipes= this.recipes.filter(r=> r.id !== id)
     this.writeFileRecipes
 }
 
