@@ -6,10 +6,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 export const postSetUserSignin = createAsyncThunk(
     "auth/postSetUserSignin",
     async (login,password) => {
-        
-        console.log(login + password);
 
-        const base64Credentials = btoa(`${login}${password}`); 
+        const base64Credentials = btoa(`${login}:${password}`); 
         console.log(base64Credentials);
 
         const response = await fetch("http://127.0.0.1:3001", {
