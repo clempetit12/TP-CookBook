@@ -1,0 +1,27 @@
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(252, 207, 207);
+    font-size: larger;
+}
+li{
+    list-style: none;
+}
+
+button{
+    border: none;
+    background-color: rgb(186, 186, 186);
+    border-radius: 5px;
+    margin-right: 2rem;
+}
+
+.removeStyle{
+    text-decoration: none;
+    color: black;
+}
+
+body{
+    margin: 0;
+}
