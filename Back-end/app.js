@@ -25,7 +25,12 @@ app.use('/recipesRoad', recipesRoad);
 app.use('/ingredientsRoad', ingredientsRoad);
 
 
-
+app.post('/authenticate', authentification, (req, res) => {
+   console.log("authentification");
+  });
+  
+     
+  
 app.listen(port, () => {
     ingredientsDao.readFileIngredients()
     recipesDao.readFileRecipes()
