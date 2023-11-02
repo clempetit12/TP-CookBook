@@ -5,7 +5,6 @@ import Recipe from "../../models/Recipe.js"
 import {useDispatch} from "react-redux"
 import { postRecipes } from "./recipeSlice";
 
-
 const AddRecipeForm = () => {
 
   const dispatch = useDispatch()
@@ -58,7 +57,6 @@ const AddRecipeForm = () => {
  
   return (
     <>
-      <h3>Add a recipe</h3>
 
       <form action="#" onSubmit={handleAddFormSubmission}>
         <div className={style.labelsAndInputs}>
