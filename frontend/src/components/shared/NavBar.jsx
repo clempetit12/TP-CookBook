@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import style from "./NavBar.module.css"
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
+
+  const authMode = useSelector(state => state.auth.authMode)
   return (
     <nav>
       <div>
@@ -13,7 +16,7 @@ const NavBar = () => {
         <ul>
             <li>
                 <button>
-                    <Link className={style.removeStyle} to={"/auth"}>Auth</Link>
+                    <Link className={style.removeStyle} to={"/auth"}>{authMode}</Link>
                 </button>
             </li>
         </ul>
