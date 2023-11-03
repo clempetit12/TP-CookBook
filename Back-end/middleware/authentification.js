@@ -15,10 +15,11 @@ export function authentification(req, res, next) {
   
     // Vérifier le password et le login
     if (login && password && login === process.env.LOGIN && password === process.env.PASSWORD) {
-      return next();
       console.log("ok");
+      return next();
+      
     }
-
-    return res.sendStatus(401);
     console.log("echec");
+    return res.sendStatus(401);
+   
 }

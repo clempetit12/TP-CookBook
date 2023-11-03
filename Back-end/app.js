@@ -27,6 +27,7 @@ app.use('/ingredientsRoad', ingredientsRoad);
 
 app.post('/authenticate', authentification, (req, res) => {
    console.log("authentification");
+   res.status(200).send('Authentification réussie');
   });
   
      
