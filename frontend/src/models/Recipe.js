@@ -1,4 +1,4 @@
-export class Recipe {
+class Recipe {
     constructor (name, description, timeCooking, prepTime, servings, ingredients){
         this.name = name
         this.description = description
@@ -9,3 +9,4 @@ export class Recipe {
  
     }
 }
+export default Recipe

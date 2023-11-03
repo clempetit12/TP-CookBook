@@ -1,4 +1,4 @@
-export class Ingredient {
+class Ingredient {
     constructor ( name, quantity, unit){
         this.name = name
         this.quantity = quantity
@@ -7,3 +7,4 @@ export class Ingredient {
  
     }
 }
+export default Ingredient

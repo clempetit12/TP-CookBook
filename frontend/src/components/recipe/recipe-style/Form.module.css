@@ -1,0 +1,33 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topLabels{
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+.topInput{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.labelsAndInputs{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+.bottom{
+display: flex;
+align-items: center;
+gap: 1rem;
+margin-top: 2.5rem;
+margin-bottom: 2.5rem;
+}
+
+h1{
+    text-align: center;
+}
+
