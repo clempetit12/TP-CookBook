@@ -12,22 +12,22 @@ export const postSetUserSignin = createAsyncThunk(
 console.log(password);
         const base64Credentials = btoa(`${login}:${password}`); 
         console.log(base64Credentials);
-        
-try{
+
         const response = await fetch("http://127.0.0.1:3001/authenticate", {
             method: "POST",
             headers: {
                 "Authorization": `Basic ${base64Credentials}`
+               
             }
    
         })
         console.log(response.status);
         if (response.status === 200) {
-
+            localStorage.setItem("user", base64Credentials); 
             // Authentification réussie
             const data = await response.json();
             console.log(data);
-            localStorage.setItem("user", JSON.stringify(data))
+            localStorage.setItem("user", data); 
             setAuthMode("authentifié")
             return base64Credentials;
           } else {
@@ -36,10 +36,7 @@ try{
             setAuthMode("s'authentifier")
             throw new Error("Authentification échouée");
           }
-        } catch (error) {
-            console.error("Erreur lors de la requête POST :", error);
-            throw error; // Vous pouvez relancer l'erreur pour que le thunk la gère.
-          }
+        
     })
 
 

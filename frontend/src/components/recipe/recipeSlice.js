@@ -59,10 +59,14 @@ export const postRecipes = createAsyncThunk(
 export const deleteRecipes = createAsyncThunk(
   "recipes/deleteRecipes",
   async (recipe) => {
+    const user = localStorage.getItem('user')
     const response = await fetch(
       `http://127.0.0.1:3001/recipesRoad/${recipe.id}`,
       {
         method: "DELETE",
+        headers: {
+          'Authorization': `Basic ${user}`, 
+        },
       }
     );
 

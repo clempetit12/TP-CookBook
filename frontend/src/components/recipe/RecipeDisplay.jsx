@@ -18,6 +18,9 @@ const RecipeDisplay = () => {
         console.log(selectedRecipe);
         navigate("/details");
       }
+      const deleteHandler = (recipe) => {
+        dispatch(deleteRecipes(recipe))
+      }
 
     const editHandler = (recipe) => {
         console.log("edit");
@@ -53,7 +56,7 @@ const RecipeDisplay = () => {
                             <p class="card-text">{recipe.description}</p>
                         </div>
                         <div className="card-footer">
-                            {user ? (<div><button onClick={() => editHandler(recipe)} className="btn btn-warning">Edit</button><button onClick={() => { dispatch(deleteRecipes(recipe)) }} className="btn btn-danger">Delete</button></div>) : " "}
+                            {user ? (<div><button onClick={() => editHandler(recipe)} className="btn btn-warning">Edit</button><button onClick={() => deleteHandler(recipe)} className="btn btn-danger">Delete</button></div>) : " "}
                             <div className="d-flex" >
                                 <button onClick={() => detailsHandler(recipe)} className="btn btn-primary ms-auto">Details</button>
                             </div>
