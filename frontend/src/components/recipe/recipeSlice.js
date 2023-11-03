@@ -58,15 +58,15 @@ export const postRecipes = createAsyncThunk(
 //DELETE
 export const deleteRecipes = createAsyncThunk(
   "recipes/deleteRecipes",
-  async (selectedRecipe) => {
+  async (recipe) => {
     const response = await fetch(
-      `http://127.0.0.1:3001/recipesRoad/${selectedRecipe.id}`,
+      `http://127.0.0.1:3001/recipesRoad/${recipe.id}`,
       {
         method: "DELETE",
       }
     );
     if (response.status === 200) {
-      return selectedRecipe;
+      return recipe;
     }
   }
 );
@@ -115,14 +115,12 @@ const recipeSlice = createSlice({
       console.log(state.recipes);
     });
     builder.addCase(deleteRecipes.fulfilled, (state, action) => {
-      let aRecipes = state.recipes.find((p) => p.id === action.payload.id);
-      console.log(aRecipes);
-      if (aRecipes) {
-        state.recipes = state.recipes.filter(
-          (r) => r.id !== action.payload.id
-        );
-      }
-    });
+      let foundRecipe = state.recipes.find(r => r.id === action.payload.id)
+            console.log(foundRecipe);
+            if (foundRecipe) {
+                state.recipes = state.recipes.filter(r => r.id !== action.payload.id)
+            }
+        })
     builder.addCase(editRecipe.fulfilled, (state, action) => {
       state.recipes = [
         ...state.recipes.filter((r) => r.id !== action.payload.id),

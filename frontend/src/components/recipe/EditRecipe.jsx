@@ -1,10 +1,12 @@
-import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import style from "./recipe-style/Form.module.css";
 
 
 
 const EditRecipe = () => {
+
+  const selectRecipe = useSelector(state => state.recipes.selectRecipe)
 
     const dispatch = useDispatch()
     const titreName = useRef();
@@ -20,6 +22,9 @@ const EditRecipe = () => {
       e.preventDefault()
  
     }
+    useEffect(() => {
+      console.log(selectRecipe);
+    })
 
   return (
     <>
@@ -38,17 +43,17 @@ const EditRecipe = () => {
     </div>
 
     <div className={style.topInput}>
-      <input type="text" name="name" ref={titreName} />
-      <input type="text" name="timeCooking" ref={timeCookingRef} />
-      <input type="text" name="prepTime" ref={prepTimeRef} />
-      <input type="text" name="servings" ref={servingsRef} />
+      <input type="text" name="name" ref={titreName} defaultValue={selectRecipe?.name}/>
+      <input type="text" name="timeCooking" ref={timeCookingRef} defaultValue={selectRecipe?.timeCooking}/>
+      <input type="text" name="prepTime" ref={prepTimeRef} defaultValue={selectRecipe?.prepTime}/>
+      <input type="text" name="servings" ref={servingsRef} defaultValue={selectRecipe?.servings}/>
     </div>
   </div>
   <div>
     <label htmlFor="description">description</label>
   </div>
   <div>
-    <textarea type="text" name="description" ref={descriptionRef} />
+    <textarea type="text" name="description" ref={descriptionRef} defaultValue={selectRecipe?.description}/>
   </div>
   <div>
     <div className={style.bottom}>
