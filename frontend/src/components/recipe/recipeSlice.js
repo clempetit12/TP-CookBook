@@ -65,8 +65,12 @@ export const deleteRecipes = createAsyncThunk(
         method: "DELETE",
       }
     );
+
     if (response.status === 200) {
       return recipe;
+    } else {
+      
+      return Promise.reject(new Error('La suppression a échoué'));
     }
   }
 );
@@ -115,12 +119,10 @@ const recipeSlice = createSlice({
       console.log(state.recipes);
     });
     builder.addCase(deleteRecipes.fulfilled, (state, action) => {
-      let foundRecipe = state.recipes.find(r => r.id === action.payload.id)
-            console.log(foundRecipe);
-            if (foundRecipe) {
-                state.recipes = state.recipes.filter(r => r.id !== action.payload.id)
-            }
-        })
+      const recipeId = action.payload.id;
+      state.recipes = state.recipes.filter((recipe) => recipe.id !== recipeId);
+      console.log(state.recipes);
+    });
     builder.addCase(editRecipe.fulfilled, (state, action) => {
       state.recipes = [
         ...state.recipes.filter((r) => r.id !== action.payload.id),
