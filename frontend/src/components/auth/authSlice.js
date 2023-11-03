@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -24,10 +25,13 @@ try{
             // Authentification réussie
             const data = await response.json();
             console.log(data);
-            localStorage.setItem("token", data.idToken);
+            localStorage.setItem("token", data.login);
+            setAuthMode("authentifié")
             return base64Credentials;
           } else {
             // Gérer les erreurs d'authentification
+            alert("mauvaise authentification")
+            setAuthMode("s'authentifier")
             throw new Error("Authentification échouée");
           }
         } catch (error) {
@@ -43,7 +47,7 @@ const authSlice = createSlice({
     name: "auth",
     initialState: {
         user: null,
-        authMode: "Se connecter"
+        authMode: "S'authentifier"
     },
     reducers: {
         logOutAction(state, action) {
@@ -58,6 +62,8 @@ const authSlice = createSlice({
         builder.addCase(postSetUserSignin.fulfilled, (state, action) => {
             state.user = action.payload
             console.log(state.user);
+          
+        
         })
 
 
