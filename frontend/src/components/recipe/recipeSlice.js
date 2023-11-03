@@ -40,9 +40,11 @@ export const fetchRecipesById = createAsyncThunk(
 export const postRecipes = createAsyncThunk(
   "recipes/postRecipes",
   async (newRecipe) => {
+    const user = localStorage.getItem('user')
     const response = await fetch(`http://127.0.0.1:3001/recipesRoad`, {
       method: "POST",
       headers: {
+        'Authorization': `Basic ${user}`, 
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newRecipe),
@@ -83,11 +85,13 @@ export const deleteRecipes = createAsyncThunk(
 export const editRecipe = createAsyncThunk(
   "recipes/editRecipe",
   async ({ recipeId, ...newRecipe }) => {
+    const user = localStorage.getItem('user')
     const response = await fetch(
       `http://127.0.0.1:3001/recipesRoad/${recipeId}`,
       {
         method: "PUT",
         headers: {
+          'Authorization': `Basic ${user}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newRecipe),
